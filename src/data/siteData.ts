@@ -139,3 +139,24 @@ export const STATS: Stat[] = [
   { value: "80%", label: "Avg resolution rate" },
   { value: "4.9★", label: "Average CSAT" },
 ];
+
+export const STEPS = [
+  {
+    number: "1",
+    title: "Connect your channels",
+    description:
+      "Link your email, chat, and social channels in seconds using our guided setup wizard.",
+  },
+  {
+    number: "2",
+    title: "Train your AI",
+    description:
+      "Upload your FAQs, docs, and past tickets. FlowDesk learns your voice and policies instantly.",
+  },
+  {
+    number: "3",
+    title: "Go live & scale",
+    description:
+      "FlowDesk resolves up to 70% of tickets automatically, freeing your team for complex issues.",
+  },
+];
