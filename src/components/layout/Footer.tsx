@@ -64,7 +64,9 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/5 text-center py-4 text-paper/30 text-xs">
-        © 2025 FlowDesk Inc. All rights reserved.
+        <div className="border-t border-white/5 text-center py-4 text-paper/30 text-xs">
+          © {new Date().getFullYear()} FlowDesk Inc. All rights reserved.
+        </div>
       </div>
     </footer>
   );
