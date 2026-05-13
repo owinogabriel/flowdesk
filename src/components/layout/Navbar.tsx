@@ -45,6 +45,8 @@ export default function Navbar() {
         <button
           className="md:hidden text-ink"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
