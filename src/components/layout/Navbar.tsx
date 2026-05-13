@@ -60,7 +60,9 @@ export default function Navbar() {
               key={item.path}
               to={item.path}
               onClick={() => setMobileOpen(false)}
-              className="text-sm font-medium text-muted hover:text-ink transition-colors"
+              className={`text-sm font-medium transition-colors ${
+                pathname === item.path ? 'text-ink' : 'text-muted hover:text-ink'
+              }`}
             >
               {item.label}
             </Link>
