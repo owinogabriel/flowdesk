@@ -39,7 +39,5 @@ export default function Button({
     <button type={props.type ?? "button"} className={classes} {...props}>
       {children}
     </button>
-      {children}
-    </button>
   );
 }
