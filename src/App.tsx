@@ -1,7 +1,26 @@
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+import HomePage from "./pages/HomePage";
+import PricingPage from "./pages/PricingPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+
 export default function App() {
   return (
-    <div className="min-h-screen bg-paper flex items-center justify-center">
-      <h1 className="font-serif text-5xl text-accent">FlowDesk</h1>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+
+      <main className="flex-1 pt-[72px]">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </main>
+
+      <Footer />
     </div>
-  )
+  );
 }
