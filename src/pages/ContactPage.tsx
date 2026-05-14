@@ -1,6 +1,7 @@
 import { CheckCircle, Icon, Mail, MapPin, MessageCircle } from "lucide-react";
 import SectionHeader from "../components/ui/SectionHeader";
 import { useState } from "react";
+import Button from "../components/ui/Button";
 
 // ── Types ──────────────────────────────────────────────────
 interface FormState {
@@ -88,6 +89,19 @@ export default function ContactPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!validate()) return; // Don't submit if validation fails
+
+    setLoading(true);
+    // Simulate an API call
+    await new Promise((resolve) => setTimeout(resolve, 1200)); // Simulate network delay
+    setLoading(false);
+    setSubmitted(true);
+  }
+
+  // Reset the form
+  function handleReset() {
+    setForm({ name: "", email: "", size: "1-10 employees", message: "" }); // Clear form fields
+    setErrors({}); // Clear errors
+    setSubmitted(false); // Go back to the form view
   }
   return (
     <section className="py-24 px-6 lg:px-16">
@@ -138,14 +152,74 @@ export default function ContactPage() {
                 </p>
               </div>
               <button
-                // onClick={handleReset}
+                onClick={handleReset}
                 className="text-accent text-sm font-semibold hover:underline mt-2"
               >
                 Send another message
               </button>
             </div>
           ) : (
-            <form></form>
+            <form
+              onSubmit={handleSubmit}
+              noValidate
+              className="flex flex-col gap-5"
+            >
+              <h3 className="font-serif text-2xl text-ink mb-1">
+                Send us a message
+              </h3>
+
+              <Field label="Full Name" error={errors.name}>
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  placeholder="Sarah Johnson"
+                  className={inputClass}
+                />
+              </Field>
+              <Field label="Work Email" error={errors.email}>
+                <input
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="sarah@company.com"
+                  className={inputClass}
+                />
+              </Field>
+              <Field label="Company Size">
+                <select
+                  name="size"
+                  value={form.size}
+                  onChange={handleChange}
+                  className={inputClass}
+                >
+                  <option>1–10 employees</option>
+                  <option>11–50 employees</option>
+                  <option>51–200 employees</option>
+                  <option>200+ employees</option>
+                </select>
+              </Field>
+
+              <Field label="Message" error={errors.message}>
+                <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  placeholder="Tell us about your support needs…"
+                  rows={4}
+                  className={`${inputClass} resize-none`}
+                />
+              </Field>
+
+              <Button
+                type="submit"
+                variant="primary"
+                className="w-full justify-center mt-1"
+                disabled={loading}
+              >
+                {loading ? "Sending…" : "Send message →"}
+              </Button>
+            </form>
           )}
         </div>
       </div>
