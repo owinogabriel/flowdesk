@@ -5,12 +5,14 @@ import HomePage from "./pages/HomePage";
 import PricingPage from "./pages/PricingPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import { useScrollToTop } from "./hooks/useScrollToTop";
 
 export default function App() {
+  useScrollToTop();
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-
       <main className="flex-1 pt-[72px]">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -19,7 +21,6 @@ export default function App() {
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>
-
       <Footer />
     </div>
   );

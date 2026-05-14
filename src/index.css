@@ -8,3 +8,60 @@
   html { scroll-behavior: smooth; }
   body { @apply bg-paper text-ink font-sans antialiased; }
 }
+
+@layer utilities {
+  .animate-fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .animate-fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-fade-up-delay-1 {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s 0.1s ease, transform 0.6s 0.1s ease;
+  }
+
+  .animate-fade-up-delay-1.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-fade-up-delay-2 {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s 0.2s ease, transform 0.6s 0.2s ease;
+  }
+
+  .animate-fade-up-delay-2.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-fade-up-delay-3 {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s 0.3s ease, transform 0.6s 0.3s ease;
+  }
+
+  .animate-fade-up-delay-3.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .page-fade {
+    animation: pageFadeIn 0.35s ease both;
+  }
+
+  @keyframes pageFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
