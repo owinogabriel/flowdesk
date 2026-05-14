@@ -106,7 +106,7 @@ colors: {
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/flowdesk.git
+git clone https://github.com/owinogabrieel/flowdesk.git
 cd flowdesk
 
 # Install dependencies
