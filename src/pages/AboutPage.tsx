@@ -71,7 +71,7 @@ export default function AboutPage() {
               be a better way.
             </p>
             <p className="text-muted text-lg leading-relaxed">
-              Today we are team of 38 accross 12 countries, united by the belief
+              Today we are a team of 38 across 12 countries, united by the belief
               that great customer support shouldn't require an army of agents.
             </p>
           </div>
