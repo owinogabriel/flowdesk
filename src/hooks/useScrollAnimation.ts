@@ -27,5 +27,11 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>(
       },
       { threshold },
     );
-  });
+    observer.observe(element);
+
+    // cleanup — always disconnect when component unmounts
+    return () => observer.disconnect();
+  }, [threshold, once]);
+
+  return { ref, isVisible };
 }
