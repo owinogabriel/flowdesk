@@ -54,7 +54,8 @@ const VALUES = [
 
 export default function AboutPage() {
   return (
-    <>
+    <div className="page-fade">
+
       {/* HERO */}
       <section className="py-24 px-6 lg:px-16">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -159,7 +160,7 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

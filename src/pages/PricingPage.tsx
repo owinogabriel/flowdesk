@@ -6,7 +6,7 @@ import { PRICING_PLANS } from "../data/siteData";
 
 export default function PricingPage() {
   return (
-    <section className="py-24 px-6 lg:px-16">
+    <section className="page-fade py-24 px-6 lg:px-16">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <SectionHeader

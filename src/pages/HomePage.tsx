@@ -6,12 +6,12 @@ import TestimonialsSection from "../components/sections/TestimonialsSection";
 
 export default function HomePage() {
   return (
-    <>
+    <div className="page-fade ">
       <HeroSection />
       <FeatureSection />
       <HowItWorksSection />
       <TestimonialsSection />
       <CtaBanner />
-    </>
+    </div>
   );
 }
