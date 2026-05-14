@@ -1,4 +1,4 @@
-import { CheckCircle, Icon, Mail, MapPin, MessageCircle } from "lucide-react";
+import { CheckCircle, Mail, MapPin, MessageCircle } from "lucide-react";
 import SectionHeader from "../components/ui/SectionHeader";
 import { useState } from "react";
 import Button from "../components/ui/Button";

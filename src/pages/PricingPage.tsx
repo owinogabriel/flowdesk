@@ -1,4 +1,3 @@
-import { Section } from "lucide-react";
 import Button from "../components/ui/Button";
 import type { PricingPlan } from "../types";
 import SectionHeader from "../components/ui/SectionHeader";
