@@ -54,14 +54,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   async function login(credentials: LoginCredentials) {
     dispatch({ type: "SET_LOADING", payload: true });
-    const user = await mockLogin(credentials); // throws on failure
-    dispatch({ type: "SET_USER", payload: user });
+    try {
+      const user = await mockLogin(credentials); // throws on failure
+      dispatch({ type: "SET_USER", payload: user });
+    } catch (error) {
+      dispatch({ type: "SET_LOADING", payload: false });
+      throw error;
+    }
   }
 
   async function register(credentials: RegisterCredentials) {
     dispatch({ type: "SET_LOADING", payload: true });
-    const user = await mockRegister(credentials);
-    dispatch({ type: "SET_USER", payload: user });
+    try {
+      const user = await mockRegister(credentials);
+      dispatch({ type: "SET_USER", payload: user });
+    } catch (error) {
+      dispatch({ type: "SET_LOADING", payload: false });
+      throw error;
+    }
   }
 
   function logout() {
