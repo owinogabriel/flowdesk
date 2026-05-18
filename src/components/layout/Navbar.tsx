@@ -1,11 +1,13 @@
-import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { NAV_ITEMS } from "../../data/siteData";
+import { Link, useLocation } from 'react-router-dom'
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
+import { NAV_ITEMS } from '../../data/siteData'
+import { useAuth } from '../../context/AuthContext'
 
 export default function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const { pathname } = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const { pathname } = useLocation()
+  const { isAuthenticated, logout } = useAuth()
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-paper/90 backdrop-blur-md border-b border-border">
@@ -24,33 +26,56 @@ export default function Navbar() {
                 to={item.path}
                 className="relative text-sm font-medium transition-colors group"
               >
-                {/* Text color */}
                 <span
                   className={
                     pathname === item.path
-                      ? "text-ink"
-                      : "text-muted group-hover:text-ink transition-colors"
+                      ? 'text-ink'
+                      : 'text-muted group-hover:text-ink transition-colors'
                   }
                 >
                   {item.label}
                 </span>
-
-                {/* Animated underline */}
                 <span
                   className={`absolute -bottom-1 left-0 h-[2px] bg-accent rounded-full transition-all duration-300 ${
-                    pathname === item.path ? "w-full" : "w-0 group-hover:w-full"
+                    pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}
                 />
               </Link>
             </li>
           ))}
-          <li>
-            <Link
-              to="/contact"
-              className="bg-ink text-paper text-sm font-semibold px-5 py-2 rounded-full hover:bg-accent transition-colors"
-            >
-              Get Started
-            </Link>
+
+          <li className="flex items-center gap-3">
+            {isAuthenticated ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="text-sm font-medium text-muted hover:text-ink transition-colors"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={logout}
+                  className="bg-ink text-paper text-sm font-semibold px-5 py-2 rounded-full hover:bg-accent transition-colors"
+                >
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="text-sm font-medium text-muted hover:text-ink transition-colors"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  to="/register"
+                  className="bg-ink text-paper text-sm font-semibold px-5 py-2 rounded-full hover:bg-accent transition-colors"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </li>
         </ul>
 
@@ -70,21 +95,49 @@ export default function Navbar() {
               to={item.path}
               onClick={() => setMobileOpen(false)}
               className={`text-sm font-medium transition-colors ${
-                pathname === item.path ? "text-ink" : "text-muted"
+                pathname === item.path ? 'text-ink' : 'text-muted'
               }`}
             >
               {item.label}
             </Link>
           ))}
-          <Link
-            to="/contact"
-            onClick={() => setMobileOpen(false)}
-            className="bg-ink text-paper text-sm font-semibold px-5 py-2.5 rounded-full text-center"
-          >
-            Get Started
-          </Link>
+
+          {isAuthenticated ? (
+            <>
+              <Link
+                to="/dashboard"
+                onClick={() => setMobileOpen(false)}
+                className="text-sm font-medium text-muted hover:text-ink transition-colors"
+              >
+                Dashboard
+              </Link>
+              <button
+                onClick={() => { logout(); setMobileOpen(false) }}
+                className="bg-ink text-paper text-sm font-semibold px-5 py-2.5 rounded-full text-center"
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                onClick={() => setMobileOpen(false)}
+                className="text-sm font-medium text-muted hover:text-ink transition-colors"
+              >
+                Sign in
+              </Link>
+              <Link
+                to="/register"
+                onClick={() => setMobileOpen(false)}
+                className="bg-ink text-paper text-sm font-semibold px-5 py-2.5 rounded-full text-center"
+              >
+                Get Started
+              </Link>
+            </>
+          )}
         </div>
       )}
     </nav>
-  );
+  )
 }
