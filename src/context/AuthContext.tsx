@@ -1,5 +1,16 @@
-import { createContext, useReducer } from "react";
-import type { AuthContextType,  AuthState } from "../types/user";
+import { createContext, useContext, useEffect, useReducer } from "react";
+import type {
+  AuthContextType,
+  AuthState,
+  LoginCredentials,
+  RegisterCredentials,
+} from "../types/user";
+import {
+  getSession,
+  mockLogin,
+  mockLogout,
+  mockRegister,
+} from "../data/mockAuth";
 
 const initialState: AuthState = {
   user: null,
@@ -30,9 +41,44 @@ function authReducer(state: AuthState, action: AuthAction): AuthState {
   }
 }
 
+const AuthContext = createContext<AuthContextType | null>(null);
 
-const AuthContext = createContext<AuthContextType | null>(null)
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [state, dispatch] = useReducer(authReducer, initialState);
 
-export function AuthProvider({children} : {children:React.ReactNode}){
-  const [state, dispatch] =  useReducer(authReducer, initialState)
+  // On mount - check if session exist in localstorage
+  useEffect(() => {
+    const session = getSession();
+    dispatch({ type: "SET_USER", payload: session });
+  });
+
+  async function login(credentials: LoginCredentials) {
+    dispatch({ type: "SET_LOADING", payload: true });
+    const user = await mockLogin(credentials); // throws on failure
+    dispatch({ type: "SET_USER", payload: user });
+  }
+
+  async function register(credentials: RegisterCredentials) {
+    dispatch({ type: "SET_LOADING", payload: true });
+    const user = await mockRegister(credentials);
+    dispatch({ type: "SET_USER", payload: user });
+  }
+
+  function logout() {
+    mockLogout();
+    dispatch({ type: "LOGOUT" });
+  }
+
+  return (
+    <AuthContext.Provider value={{ ...state, login, register, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+//  HOOK
+export function useAuth(): AuthContextType {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error("useAuth must be used inside AuthProvider");
+  return ctx;
 }
