@@ -50,7 +50,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const session = getSession();
     dispatch({ type: "SET_USER", payload: session });
-  });
+  }, []);
 
   async function login(credentials: LoginCredentials) {
     dispatch({ type: "SET_LOADING", payload: true });
