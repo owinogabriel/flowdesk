@@ -183,7 +183,7 @@ On Vercel this is handled automatically.
 - **Blog page** — `/blog` with a post list and individual post routes using `useParams`
 - **Dark mode** — toggle using a `useTheme` hook and Tailwind's `dark:` variant
 - **Toast notifications** — a `useToast` hook with a portal-rendered notification stack
-- **Real form backend** — swap the `setTimeout` in ContactPage for a `fetch` to Resend or EmailJS
+- **Real form backend** — swap the `setTimeout` in ContactPage for a `fetch` to Resend or EmailJS.
 - **Authentication** — add a `/dashboard` route protected by a `RequireAuth` wrapper component.
 
 ---
